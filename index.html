@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -22,13 +22,15 @@
             id="password"
             placeholder="Your Secure Password"
             aria-label="Generated Password"
-          ></textarea>
+          >
+          </textarea>
         </div>
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
+          <button id="copy" class="btn">Copy to Clipboard</button>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./assets/script.js" defer></script>
   </body>
 </html>

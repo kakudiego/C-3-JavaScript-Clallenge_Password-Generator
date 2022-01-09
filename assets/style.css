@@ -13,6 +13,8 @@ body,
 }
 
 body {
+  display: flex;
+  justify-content: center;
   font-family: sans-serif;
   background-color: #f9fbfd;
 }
