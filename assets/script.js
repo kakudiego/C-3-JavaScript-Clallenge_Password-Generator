@@ -98,20 +98,23 @@ let charPool = {
   ],
 };
 
-function generatePassword() {
+function lengthCharacters() {
+  // this function asks the user how long the password will be
   let promptLength = window.prompt("Password Length? min 8 - max 128?");
 
   // loop when < 8 or > 128
   while (promptLength <= 7 || promptLength >= 129) {
-    window.alert(
-      "Invalid! " +
-        promptLength +
-        " , isn't a number between 8 and 128! Try again."
+    window.alert("Invalid! " + promptLength + " , isn't a number between 8 and 128! Try again."
     );
-    return generatePassword();
+    lengthCharacters();
   }
-
   window.alert("Password with " + promptLength + " characters.");
+  return promptLength;
+}
+
+function selectParameters() {
+  // select the parameters
+  // window.alert("Password with " + promptLength + " characters.");
   let askParameters = {
     askLowCase: window.confirm("Include Lower Case?"),
     askUpperCase: window.confirm("Include Upper Case?"),
@@ -119,6 +122,7 @@ function generatePassword() {
     askSymbol: window.confirm("Include Symbols?"),
   };
 
+  // this checks if user selected at least 1 parameter
   while (
     askParameters.askLowCase === false &&
     askParameters.askUpperCase === false &&
@@ -126,13 +130,15 @@ function generatePassword() {
     askParameters.askSymbol === false
   ) {
     window.alert("Invalid! At least one parameter must be selected.");
-    return generatePassword();
+    selectParameters();
   }
 
-  let passCharacters = [];
+  // array of possible chars
+  // This is an accumulator variable
+  let passCharacters = []; //THIS IS AN ARRAY (empty)
 
   if (askParameters.askLowCase) {
-    passCharacters = passCharacters.concat(charPool.lowCase);
+    passCharacters = passCharacters.concat(charPool.lowCase); //concat = concatenate.  This mean to join stuff together
   }
 
   if (askParameters.askUpperCase) {
@@ -147,12 +153,23 @@ function generatePassword() {
     passCharacters = passCharacters.concat(charPool.symbols);
   }
 
-  let randomPassword = "";
+  // all the chars
+  return passCharacters;
+}
+
+function generatePassword() {
+  let promptLength = lengthCharacters();
+  promptLength = parseInt(promptLength);
+  console.log(promptLength);
+  console.log(typeof promptLength);
+
+  let passCharacters = selectParameters();
+
+  let randomPassword = ""; //THIS IS A STRING
 
   for (let i = 0; i < promptLength; i++) {
-    randomPassword =
-      randomPassword +
-      passCharacters[Math.floor(Math.random() * passCharacters.length)];
+    // each time this loop runs, I am adding a random character to the randomPassword variable. randomPassword is a string
+    randomPassword = randomPassword + passCharacters[Math.floor(Math.random() * passCharacters.length)];
     console.log(randomPassword);
   }
   return randomPassword;
@@ -171,14 +188,21 @@ let generateBtn = document.querySelector("#generate");
 // Add event listener to generate button, callback the function when clicked
 generateBtn.addEventListener("click", getPassword);
 
-let copy = document.querySelector("#copy");
-copy.addEventListener("click", function () {
-  copyPassword();
-});
-
 // copy the password to clipboard
 function copyPassword() {
   document.getElementById("password").select();
   document.execCommand("Copy");
   alert("Password copied to clipboard!");
 }
+
+let copy = document.querySelector("#copy");
+copy.addEventListener("click", function () {
+  copyPassword();
+});
+
+// // THESE ARE ALL DIFFERENT DATATYPES
+// let myString = ""; // mystring = 'abcdefg'
+// let myNumber = 0; // myNumber = 100;
+// let myArray = []; // myArray = ['1', 1, 'a', 100]    //THIS IS A LIST
+// let myObject = {}; // myObject = { "a": [1,2,3,4,5]  }   //Think of this like a dictionary
+// console.log(myObject["a"]); // [1,2,3,4,5]
