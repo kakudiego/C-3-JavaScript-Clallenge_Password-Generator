@@ -6,130 +6,43 @@ let randomSelector = function (min, max) {
 
 // possible characters
 let charPool = {
-  lowCase: [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ],
-  upCase: [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ],
+  lowCase: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+  upCase: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
   numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-  symbols: [
-    "!",
-    "#",
-    "$",
-    "%",
-    "&",
-    "'",
-    "(",
-    ")",
-    "*",
-    "+",
-    ",",
-    "-",
-    ".",
-    "/",
-    ":",
-    ";",
-    " < ",
-    "=",
-    " > ",
-    " ? ",
-    "@",
-    "[",
-    "\\",
-    "]",
-    " ^ ",
-    "_",
-    "`",
-    "{",
-    "|",
-    "}",
-    "~",
-  ],
+  symbols: ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"],
 };
 
-function lengthCharacters() {
-  // this function asks the user how long the password will be
-  let promptLength = window.prompt("Password Length? min 8 - max 128?");
+let lengthCharacters = function () {
+  let promptLength = prompt("Password Length? min 8 - max 128?");
 
-  // loop when < 8 or > 128
-  while (promptLength <= 7 || promptLength >= 129) {
-    window.alert("Invalid! " + promptLength + " , isn't a number between 8 and 128! Try again."
-    );
-    lengthCharacters();
+  // Loop if answer is outside the parameters
+  if (promptLength <= 7 || promptLength >= 129) {
+    alert(promptLength + " is Invalid! Try again.");
+    return lengthCharacters();
   }
-  window.alert("Password with " + promptLength + " characters.");
+  // if (promptLength = (any letter or symbol) {
+  //   alert(promptLength + " is Invalid! Try again.");
+  //   return lengthCharacters();
+  // }
+  else {
+    alert("Password with " + promptLength + " characters.");
+  }
   return promptLength;
-}
+};
 
 function selectParameters() {
   // select the parameters
-  // window.alert("Password with " + promptLength + " characters.");
+  // alert("Password with " + promptLength + " characters.");
   let askParameters = {
-    askLowCase: window.confirm("Include Lower Case?"),
-    askUpperCase: window.confirm("Include Upper Case?"),
-    askNumeric: window.confirm("Include Upper Case?"),
-    askSymbol: window.confirm("Include Symbols?"),
+    askLowCase: confirm("Include Lower Case?"),
+    askUpperCase: confirm("Include Upper Case?"),
+    askNumeric: confirm("Include Upper Case?"),
+    askSymbol: confirm("Include Symbols?"),
   };
 
   // this checks if user selected at least 1 parameter
-  while (
-    askParameters.askLowCase === false &&
-    askParameters.askUpperCase === false &&
-    askParameters.askNumeric === false &&
-    askParameters.askSymbol === false
-  ) {
-    window.alert("Invalid! At least one parameter must be selected.");
+  while (askParameters.askLowCase === false && askParameters.askUpperCase === false && askParameters.askNumeric === false && askParameters.askSymbol === false) {
+    alert("Invalid! At least one parameter must be selected.");
     selectParameters();
   }
 
@@ -157,7 +70,7 @@ function selectParameters() {
   return passCharacters;
 }
 
-function generatePassword() {
+let generatePassword = function () {
   let promptLength = lengthCharacters();
   promptLength = parseInt(promptLength);
   console.log(promptLength);
@@ -173,15 +86,15 @@ function generatePassword() {
     console.log(randomPassword);
   }
   return randomPassword;
-}
+};
 
 // Write password to the #password input
-function getPassword() {
+let getPassword = function () {
   let password = generatePassword();
   let passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-}
+};
 
 let generateBtn = document.querySelector("#generate");
 
@@ -189,11 +102,11 @@ let generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", getPassword);
 
 // copy the password to clipboard
-function copyPassword() {
+let copyPassword = function () {
   document.getElementById("password").select();
   document.execCommand("Copy");
   alert("Password copied to clipboard!");
-}
+};
 
 let copy = document.querySelector("#copy");
 copy.addEventListener("click", function () {
