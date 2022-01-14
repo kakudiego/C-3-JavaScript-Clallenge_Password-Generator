@@ -1,9 +1,3 @@
-let randomSelector = function (min, max) {
-  let value = Math.floor(Math.random() * (max - min + 1) + min);
-
-  return value;
-};
-
 // possible characters
 let charPool = {
   lowCase: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
@@ -20,7 +14,7 @@ let lengthCharacters = function () {
     alert(promptLength + " Invalid! Only numbers between 8 and 128.");
     return lengthCharacters();
   }
-
+  // isNaN = Not-A-Number, if the input isn't a number alert user
   if (isNaN(promptLength)) {
     alert(promptLength + " Invalid input! Only numbers between 8 and 128.");
     return lengthCharacters();
@@ -30,8 +24,8 @@ let lengthCharacters = function () {
   return promptLength;
 };
 
+// select the parameters
 let selectParameters = function () {
-  // select the parameters
   // alert("Password with " + promptLength + " characters.");
   let askParameters = {
     askLowCase: confirm("Include Lower Case?"),
