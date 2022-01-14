@@ -36,7 +36,7 @@ let selectParameters = function () {
   let askParameters = {
     askLowCase: confirm("Include Lower Case?"),
     askUpperCase: confirm("Include Upper Case?"),
-    askNumeric: confirm("Include Upper Case?"),
+    askNumeric: confirm("Include Numbers?"),
     askSymbol: confirm("Include Symbols?"),
   };
 
