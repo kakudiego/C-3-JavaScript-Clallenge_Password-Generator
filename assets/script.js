@@ -8,7 +8,7 @@ let randomSelector = function (min, max) {
 let charPool = {
   lowCase: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
   upCase: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
-  numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
   symbols: ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"],
 };
 
@@ -17,14 +17,14 @@ let lengthCharacters = function () {
 
   // Loop if answer is outside the parameters
   if (promptLength <= 7 || promptLength >= 129) {
-    alert(promptLength + " is Invalid! Try again.");
+    alert(promptLength + " Invalid! Only numbers between 8 and 128.");
     return lengthCharacters();
   }
-  // if (promptLength = (any letter or symbol) {
-  //   alert(promptLength + " is Invalid! Try again.");
-  //   return lengthCharacters();
-  // }
-  else {
+
+  if (isNaN(promptLength)) {
+    alert(promptLength + " Invalid input! Only numbers between 8 and 128.");
+    return lengthCharacters();
+  } else {
     alert("Password with " + promptLength + " characters.");
   }
   return promptLength;
@@ -45,6 +45,7 @@ let selectParameters = function () {
     alert("Invalid! At least one parameter must be selected.");
     return selectParameters();
   }
+  console.log(askParameters);
 
   // array of possible chars
   // This is an accumulator variable
@@ -55,7 +56,7 @@ let selectParameters = function () {
   }
 
   if (askParameters.askUpperCase) {
-    passCharacters = passCharacters.concat(charPool.upperCase);
+    passCharacters = passCharacters.concat(charPool.upCase); //concat = concatenate.  This mean to join stuff together
   }
 
   if (askParameters.askNumeric) {
@@ -74,7 +75,6 @@ let generatePassword = function () {
   let promptLength = lengthCharacters();
   promptLength = parseInt(promptLength);
   console.log(promptLength);
-  console.log(typeof promptLength);
 
   let passCharacters = selectParameters();
 
