@@ -30,7 +30,7 @@ let lengthCharacters = function () {
   return promptLength;
 };
 
-function selectParameters() {
+let selectParameters = function () {
   // select the parameters
   // alert("Password with " + promptLength + " characters.");
   let askParameters = {
@@ -41,9 +41,9 @@ function selectParameters() {
   };
 
   // this checks if user selected at least 1 parameter
-  while (askParameters.askLowCase === false && askParameters.askUpperCase === false && askParameters.askNumeric === false && askParameters.askSymbol === false) {
+  if (askParameters.askLowCase === false && askParameters.askUpperCase === false && askParameters.askNumeric === false && askParameters.askSymbol === false) {
     alert("Invalid! At least one parameter must be selected.");
-    selectParameters();
+    return selectParameters();
   }
 
   // array of possible chars
@@ -68,7 +68,7 @@ function selectParameters() {
 
   // all the chars
   return passCharacters;
-}
+};
 
 let generatePassword = function () {
   let promptLength = lengthCharacters();
